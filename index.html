@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>afted — Born on the Concrete</title>
+  <link rel="stylesheet" href="style.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Space+Mono:ital,wght@0,400;0,700;1,400&family=DM+Sans:wght@300;400;500&family=Unna:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet">
+</head>
+<body>
+
+  <!-- CURSOR -->
+  <div class="cursor" id="cursor"></div>
+  <div class="cursor-trail" id="cursorTrail"></div>
+
+  <!-- ===================== NAV ===================== -->
+  <nav class="nav" id="nav">
+    <a href="#home" class="nav-logo">afted</a>
+    <ul class="nav-links">
+      <li><a href="#home">Home</a></li>
+      <li><a href="#products">Shop</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+    <button class="nav-toggle" id="navToggle" aria-label="Menu">
+      <span></span><span></span><span></span>
+    </button>
+  </nav>
+
+  <!-- MOBILE MENU -->
+  <div class="mobile-menu" id="mobileMenu">
+    <a href="#home"     class="mobile-link">Home</a>
+    <a href="#products" class="mobile-link">Shop</a>
+    <a href="#contact"  class="mobile-link">Contact</a>
+  </div>
+
+  <!-- ===================== HERO ===================== -->
+  <!--
+  ================================================================
+  HOW TO ADD / CHANGE YOUR 3 SLIDESHOW IMAGES:
+
+  Step 1: Put your 3 images inside the  images/  folder
+          Example names:
+            images/slide1.jpg
+            images/slide2.jpg
+            images/slide3.jpg
+
+  Step 2: In the SLIDESHOW section below, find the 3 slide divs.
+          Each one has:  style="background-image: url('images/YOUR-IMAGE.jpg')"
+          Change the filename to match your actual image.
+
+  Step 3: Save index.html and refresh your browser.
+
+  The slideshow will automatically:
+  - Switch to the next image every 5 seconds
+  - Fade smoothly between images
+  - Let visitors click arrows or dots to change slides
+  - Swipe left/right on mobile
+  ================================================================
+  -->
+  <section class="hero" id="home">
+
+    <!-- Dark overlay so text stays readable -->
+    <div class="hero-overlay"></div>
+
+    <!-- ============================================================
+         SLIDESHOW — PUT YOUR 3 IMAGES HERE
+         ============================================================
+         Each <div class="slide"> is ONE image.
+         Change the filename inside url('images/...') to your image.
+
+         YOUR CURRENT IMAGE (hero-bg.jpg.jpeg) is set as SLIDE 1.
+         Replace slide2 and slide3 with your other photos.
+         ============================================================ -->
+    <div class="slideshow" id="slideshow">
+
+      <!-- SLIDE 1 — currently your hero-bg.jpg.jpeg photo -->
+      <div class="slide active" style="background-image: url('images/1.jpg');"></div>
+
+      <!-- SLIDE 2 — replace with your 2nd image -->
+      <div class="slide" style="background-image: url('images/2.jpg');"></div>
+
+      <!-- SLIDE 3 — replace with your 3rd image -->
+      <div class="slide" style="background-image: url('images/3.jpg');"></div>
+
+      <!--
+        WANT MORE THAN 3 SLIDES? Copy this line and change the image name:
+        <div class="slide" style="background-image: url('images/slide4.jpg');"></div>
+        Then add one more dot in the slide-dots section below.
+      -->
+    </div>
+
+    <!-- Dot indicators — one dot per slide -->
+    <div class="slide-dots" id="slideDots">
+      <span class="slide-dot active" data-index="0"></span>
+      <span class="slide-dot"        data-index="1"></span>
+      <span class="slide-dot"        data-index="2"></span>
+      <!--
+        Added a 4th slide above? Add one more dot:
+        <span class="slide-dot" data-index="3"></span>
+      -->
+    </div>
+
+    <!-- Hero text content -->
+    <div class="hero-content">
+      <div class="hero-label">afted.my — SS 2026</div>
+      <p class="hero-sub">Clothing built for the ones who never stop. Raw fits. Real culture.</p>
+      <div class="hero-cta">
+        <a href="#products" class="btn btn--primary">Shop Now</a>
+      </div>
+    </div>
+
+    <!-- Scroll indicator -->
+    <div class="hero-scroll">
+      <span>SCROLL</span>
+      <div class="hero-scroll-line"></div>
+    </div>
+
+  </section>
+
+  <!-- ===================== PRODUCTS ===================== -->
+  <section class="products" id="products">
+    <div class="section-header">
+      <span class="section-tag">// DROP 001</span>
+    </div>
+
+    <!-- Single product centred -->
+    <div class="products-grid products-grid--single">
+
+      <!-- CARD 1 -->
+      <div class="product-card">
+        <div class="product-img-wrap">
+          <!--
+            YOUR PRODUCT IMAGE IS ALREADY SET BELOW.
+            To change it: replace  images/SHIRT.jpeg  with your new image path.
+          -->
+          <img src="images/afted shirt.jpg" alt="afted Shirt">
+          <div class="product-overlay">
+            <a href="https://wa.me/60182966942?text=Hi%20afted!%20I'm%20interested%20in%20the%20afted%20Shirt" target="_blank" class="btn btn--buy">Buy Now via WhatsApp</a>
+          </div>
+        </div>
+        <div class="product-info">
+          <div class="product-num">01</div>
+          <h3 class="product-name">afted boxy tee</h3>
+          <p class="product-desc">Oversize boxy tee. 270gsm 100% cotton.</p>
+          <div class="product-footer">
+            <span class="product-price">RM 96</span>
+            <a href="https://wa.me/60182966942?text=Hi%20afted!%20I'm%20interested%20in%20the%20afted%20Shirt" target="_blank" class="product-cta">Buy Now →</a>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ===================== CONTACT ===================== -->
+  <section class="contact" id="contact">
+    <div class="contact-grid">
+
+      <!-- LEFT — contact links -->
+      <div class="contact-left">
+        <span class="section-tag">// GET IN TOUCH</span>
+        <h2 class="section-title">LET'S<br/>TALK.</h2>
+        <p class="contact-sub">We're always down to chat — sizing, orders, collabs, or just skate talk.</p>
+        <div class="contact-links">
+          <a href="https://wa.me/60182966942" target="_blank" class="contact-link">
+            <span class="contact-link-icon">▶</span>
+            <div>
+              <span class="contact-link-label">WhatsApp</span>
+              <span class="contact-link-val">+60 18-296 6942</span>
+            </div>
+          </a>
+          <a href="https://mail.google.com/mail/?view=cm&to=whatafted@gmail.com" target="_blank" class="contact-link">
+            <span class="contact-link-icon">▶</span>
+            <div>
+              <span class="contact-link-label">Email</span>
+              <span class="contact-link-val">whatafted@gmail.com</span>
+            </div>
+          </a>
+          <a href="https://instagram.com/afted.la" target="_blank" class="contact-link">
+            <span class="contact-link-icon">▶</span>
+            <div>
+              <span class="contact-link-label">Instagram</span>
+              <span class="contact-link-val">@afted.la</span>
+            </div>
+          </a>
+          <a href="https://tiktok.com/@afted.la" target="_blank" class="contact-link">
+            <span class="contact-link-icon">▶</span>
+            <div>
+              <span class="contact-link-label">TikTok</span>
+              <span class="contact-link-val">@afted.la</span>
+            </div>
+          </a>
+        </div>
+      </div>
+
+      <!-- RIGHT — order card -->
+      <div class="contact-right">
+        <div class="contact-card">
+          <h3>ORDER VIA WHATSAPP</h3>
+          <p>Just tell us what you want, your size, and we'll take it from there. Fast replies. Real people.</p>
+          <div class="order-steps">
+            <div class="order-step"><span class="step-num">01</span><span>Pick your item from the shop</span></div>
+            <div class="order-step"><span class="step-num">02</span><span>Click "Buy Now" to open WhatsApp</span></div>
+            <div class="order-step"><span class="step-num">03</span><span>Tell us your size & we'll confirm</span></div>
+            <div class="order-step"><span class="step-num">04</span><span>Pay & we ship straight to you</span></div>
+          </div>
+          <a href="https://wa.me/60182966942?text=Hi%20afted!%20I%20want%20to%20place%20an%20order." target="_blank" class="btn btn--primary" style="width:100%;text-align:center;margin-top:2rem;">Start My Order</a>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ===================== FOOTER ===================== -->
+  <footer class="footer">
+    <div class="footer-top">
+      <div class="footer-logo">afted</div>
+      <div class="footer-tagline">If you feel like quitting today, remember why you started.</div>
+    </div>
+    <div class="footer-mid">
+      <div class="footer-col">
+        <h4>Navigate</h4>
+        <a href="#home">Home</a>
+        <a href="#products">Shop</a>
+        <a href="#contact">Contact</a>
+      </div>
+      <div class="footer-col">
+        <h4>Connect</h4>
+        <a href="https://wa.me/60182966942" target="_blank">WhatsApp</a>
+        <a href="https://mail.google.com/mail/?view=cm&to=whatafted@gmail.com" target="_blank">Email</a>
+        <a href="https://instagram.com/afted.la" target="_blank">Instagram</a>
+        <a href="https://tiktok.com/@afted.la" target="_blank">TikTok</a>
+      </div>
+      <div class="footer-col">
+        <h4>Info</h4>
+        <a href="#products">Current Drop</a>
+        <a href="#contact">How to Order</a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2026 afted. All rights reserved. afted.my</span>
+      <span>Made in Malaysia 🇲🇾</span>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
