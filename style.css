@@ -284,30 +284,6 @@ a { text-decoration: none; color: inherit; }
   display: none;
 }
 
-/* Arrow buttons */
-.slide-arrow {
-  position: absolute; top: 50%;
-  transform: translateY(-50%);
-  z-index: 10;
-  background: rgba(255,255,255,0.10);
-  border: 1.5px solid rgba(255,255,255,0.35);
-  color: #fff;
-  font-size: 1.3rem;
-  width: 52px; height: 52px;
-  display: flex; align-items: center; justify-content: center;
-  cursor: none;
-  transition: background 0.25s, border-color 0.25s, transform 0.25s;
-  backdrop-filter: blur(6px);
-  -webkit-backdrop-filter: blur(6px);
-}
-.slide-arrow:hover {
-  background: var(--accent);
-  border-color: var(--accent);
-  transform: translateY(-50%) scale(1.08);
-}
-.slide-arrow--prev { left: 2rem; }
-.slide-arrow--next { right: 2rem; }
-
 /* Dot indicators */
 .slide-dots {
   position: absolute;
@@ -655,54 +631,42 @@ a { text-decoration: none; color: inherit; }
   .nav-links    { display: none; }
   .nav-toggle   { display: flex; }
 
-  /* --- Hero wrapper ---
-     Changed from fixed height to auto so the
-     portrait image determines the section height */
+  /* --- Hero wrapper --- */
   .hero {
-    height: auto;
+    height: 100svh;
     min-height: 100svh;
     padding: 0;
     display: block;
     position: relative;
   }
 
-  /* --- Slideshow container ---
-     Relative positioning so the first slide
-     (position:relative) defines the height */
+  /* --- Slideshow container --- */
   .slideshow {
-    position: relative;
+    position: absolute;
+    inset: 0;
     width: 100%;
+    height: 100%;
     z-index: 1;
   }
 
-  /* --- All slides: stack on top of each other ---
-     All slides are absolute except the first */
+  /* --- All slides: stack on top of each other --- */
   .slide {
     position: absolute;
-    top: 0; left: 0;
+    inset: 0;
     width: 100%;
     height: 100%;
-    background-image: none !important; /* disable desktop background-image */
+    background-image: none !important;
     background: #000;
     opacity: 0;
     transition: opacity 1.0s ease-in-out;
   }
   .slide.active { opacity: 1; }
 
-  /* The first slide is relative so it sets the height for the stack */
-  .slide:first-child {
-    position: relative;
-  }
-
-  /* --- slide-img: the real <img> tag ---
-     This is the KEY fix.
-     Shows the full portrait image with no cropping.
-     width:100% fills phone width.
-     height:auto keeps natural proportions. */
+  /* --- slide-img: fills full screen height on mobile --- */
   .slide-img {
-    display: block;       /* show on mobile (hidden on desktop) */
-    width: 100%;          /* fill full phone width */
-    height: auto;         /* natural height — no cropping ever */
+    display: block;
+    width: 100%;
+    height: 100%;
     object-fit: cover;
   }
 
@@ -745,16 +709,6 @@ a { text-decoration: none; color: inherit; }
   }
   .slide-dot { cursor: pointer; }
 
-  /* --- Arrows --- */
-  .slide-arrow {
-    position: absolute;
-    top: 50%; z-index: 10;
-    width: 40px; height: 40px;
-    font-size: 1rem;
-  }
-  .slide-arrow--prev { left: 1rem; }
-  .slide-arrow--next { right: 1rem; }
-
   /* --- Products --- */
   .products         { padding: 4rem 1.5rem; }
   .products-grid    { grid-template-columns: 1fr; }
@@ -775,6 +729,5 @@ a { text-decoration: none; color: inherit; }
    14. RESPONSIVE — SMALL PHONES
    ============================== */
 @media (max-width: 480px) {
-  .footer-mid  { grid-template-columns: 1fr; }
-  .slide-arrow { display: none; } /* too small for arrows on tiny phones */
+  .footer-mid { grid-template-columns: 1fr; }
 }

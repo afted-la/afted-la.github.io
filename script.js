@@ -81,10 +81,8 @@ document.querySelectorAll('.mobile-link').forEach(link => {
    which .slide has the .active class (opacity fade).
 */
 (function () {
-  const slides  = document.querySelectorAll('.slide');
-  const dots    = document.querySelectorAll('.slide-dot');
-  const btnPrev = document.getElementById('slidePrev');
-  const btnNext = document.getElementById('slideNext');
+  const slides = document.querySelectorAll('.slide');
+  const dots   = document.querySelectorAll('.slide-dot');
 
   if (!slides.length) return;
 
@@ -111,10 +109,6 @@ document.querySelectorAll('.mobile-link').forEach(link => {
   function stopAuto() {
     if (autoTimer) clearInterval(autoTimer);
   }
-
-  /* Arrows */
-  if (btnPrev) btnPrev.addEventListener('click', () => { goTo(current - 1); startAuto(); });
-  if (btnNext) btnNext.addEventListener('click', () => { goTo(current + 1); startAuto(); });
 
   /* Dots */
   dots.forEach(dot => {
