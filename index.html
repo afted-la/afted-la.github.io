@@ -39,11 +39,17 @@
   ================================================================
   HOW TO CHANGE SLIDESHOW IMAGES:
 
-  Each slide has TWO lines you must update together:
-    1.  style="background-image: url('images/1.jpg')"  ← DESKTOP
-    2.  <img class="slide-img" src="images/1.jpg">      ← MOBILE
+  Each slide has TWO lines — update BOTH to the same file:
+    1. style="background-image: url('images/1.jpg')"   ← DESKTOP
+    2. <img class="slide-img" src="images/1.jpg">       ← MOBILE
 
-  Always change BOTH to the same filename.
+  Put your portrait images (tall/vertical) in the images/ folder.
+  Recommended mobile image size: 750 x 1200px (portrait)
+  Recommended desktop image size: 1920 x 1080px (landscape)
+
+  If you have separate images for desktop and mobile:
+    - Desktop image → put in background-image url()
+    - Mobile image  → put in <img class="slide-img" src="">
   ================================================================
   -->
   <section class="hero" id="home">
@@ -52,28 +58,37 @@
 
     <div class="slideshow" id="slideshow">
 
-      <!-- SLIDE 1 — change BOTH image references when updating -->
+      <!-- ======== SLIDE 1 ========
+           TO CHANGE: update BOTH image paths below
+           Desktop: background-image: url('images/YOUR-DESKTOP-IMAGE.jpg')
+           Mobile:  <img class="slide-img" src="images/YOUR-MOBILE-IMAGE.jpg">
+           If same image for both, use the same filename in both places.
+      -->
       <div class="slide active" style="background-image: url('images/1.jpg');">
         <img class="slide-img" src="images/1 phone.jpg" alt="afted slide 1">
       </div>
 
-      <!-- SLIDE 2 — change BOTH image references when updating -->
+      <!-- ======== SLIDE 2 ======== -->
       <div class="slide" style="background-image: url('images/2.jpg');">
         <img class="slide-img" src="images/2 phone.jpg" alt="afted slide 2">
       </div>
 
-      <!-- SLIDE 3 — change BOTH image references when updating -->
+      <!-- ======== SLIDE 3 ======== -->
       <div class="slide" style="background-image: url('images/3.jpg');">
         <img class="slide-img" src="images/3 phone.jpg" alt="afted slide 3">
       </div>
 
+      <span class="slide-dot" data-index="3"></span>
+      
+        <!-- ======== SLIDE 4 ======== -->
       <div class="slide" style="background-image: url('images/4.jpg');">
-        <img class="slide-img" src="images/4 phone.jpg" alt="afted slide 4">
+        <img class="slide-img" src="images/4 phone.jpg.jpg" alt="afted slide 4">
       </div>
+      
 
       <!--
-        TO ADD A 4TH SLIDE: copy the block below, change the image name,
-        and add <span class="slide-dot" data-index="3"></span> in the dots section.
+        ======== SLIDE 4 (optional — uncomment to enable) ========
+        Also add a dot below: <span class="slide-dot" data-index="3"></span>
 
         <div class="slide" style="background-image: url('images/4.jpg');">
           <img class="slide-img" src="images/4.jpg" alt="afted slide 4">
@@ -82,15 +97,17 @@
 
     </div>
 
-    <!-- Arrow buttons -->
+    <!-- Arrow buttons — left and right -->
     <button class="slide-arrow slide-arrow--prev" id="slidePrev" aria-label="Previous">&#8592;</button>
     <button class="slide-arrow slide-arrow--next" id="slideNext" aria-label="Next">&#8594;</button>
 
-    <!-- Dot indicators — one dot per slide -->
+    <!-- Dot indicators — one per slide -->
     <div class="slide-dots" id="slideDots">
       <span class="slide-dot active" data-index="0"></span>
       <span class="slide-dot"        data-index="1"></span>
       <span class="slide-dot"        data-index="2"></span>
+      <!-- If you added slide 4 above, uncomment this: -->
+      <!-- <span class="slide-dot" data-index="3"></span> -->
     </div>
 
     <!-- Hero text content -->
@@ -102,7 +119,7 @@
       </div>
     </div>
 
-    <!-- Scroll indicator -->
+    <!-- Scroll indicator (desktop only) -->
     <div class="hero-scroll">
       <span>SCROLL</span>
       <div class="hero-scroll-line"></div>

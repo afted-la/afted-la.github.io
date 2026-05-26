@@ -74,13 +74,11 @@ document.querySelectorAll('.mobile-link').forEach(link => {
 /* ==============================
    HERO SLIDESHOW
    ==============================
-   HOW IT WORKS:
-   - Finds all  .slide  elements inside  #slideshow
-   - Every 5 seconds, removes  .active  from current slide
-     and adds  .active  to the next one
-   - CSS handles the  opacity  fade (transition: opacity 1.2s)
-   - Arrows and dots let the user switch manually
-   - Touch swipe works on mobile
+   Works for BOTH desktop and mobile.
+   - Desktop: CSS shows background-image, hides .slide-img
+   - Mobile:  CSS hides background-image, shows .slide-img
+   The JS logic is exactly the same for both — just controls
+   which .slide has the .active class (opacity fade).
 */
 (function () {
   const slides  = document.querySelectorAll('.slide');
@@ -88,30 +86,24 @@ document.querySelectorAll('.mobile-link').forEach(link => {
   const btnPrev = document.getElementById('slidePrev');
   const btnNext = document.getElementById('slideNext');
 
-  if (!slides.length) return;   // safety check — do nothing if no slides
+  if (!slides.length) return;
 
-  const SLIDE_DURATION = 2000;  // ← change this number to adjust speed (milliseconds)
-                                 //   5000 = 5 seconds,  3000 = 3 seconds
+  const SLIDE_DURATION = 5000; // milliseconds between auto-advance
   let current   = 0;
   let autoTimer = null;
 
-  /* Go to slide by index */
   function goTo(index) {
-    // Wrap around: after last slide → go to first, before first → go to last
     if (index < 0)              index = slides.length - 1;
     if (index >= slides.length) index = 0;
 
-    // Remove active from current slide and dot
     slides[current].classList.remove('active');
     if (dots[current]) dots[current].classList.remove('active');
 
-    // Update current and activate new slide and dot
     current = index;
     slides[current].classList.add('active');
     if (dots[current]) dots[current].classList.add('active');
   }
 
-  /* Auto-advance timer */
   function startAuto() {
     stopAuto();
     autoTimer = setInterval(() => goTo(current + 1), SLIDE_DURATION);
@@ -120,11 +112,11 @@ document.querySelectorAll('.mobile-link').forEach(link => {
     if (autoTimer) clearInterval(autoTimer);
   }
 
-  /* Arrow button clicks */
+  /* Arrows */
   if (btnPrev) btnPrev.addEventListener('click', () => { goTo(current - 1); startAuto(); });
   if (btnNext) btnNext.addEventListener('click', () => { goTo(current + 1); startAuto(); });
 
-  /* Dot clicks */
+  /* Dots */
   dots.forEach(dot => {
     dot.addEventListener('click', () => {
       goTo(parseInt(dot.dataset.index, 10));
@@ -132,38 +124,41 @@ document.querySelectorAll('.mobile-link').forEach(link => {
     });
   });
 
-  /* Touch swipe support (mobile) */
+  /* Touch swipe — works on mobile */
   let touchStartX = 0;
+  let touchStartY = 0;
   const hero = document.getElementById('home');
+
   if (hero) {
     hero.addEventListener('touchstart', (e) => {
       touchStartX = e.changedTouches[0].clientX;
+      touchStartY = e.changedTouches[0].clientY;
     }, { passive: true });
 
     hero.addEventListener('touchend', (e) => {
-      const diff = touchStartX - e.changedTouches[0].clientX;
-      if (Math.abs(diff) > 50) {        // minimum swipe distance = 50px
-        diff > 0 ? goTo(current + 1) : goTo(current - 1);
+      const diffX = touchStartX - e.changedTouches[0].clientX;
+      const diffY = touchStartY - e.changedTouches[0].clientY;
+      /* Only trigger if horizontal swipe is bigger than vertical (not a scroll) */
+      if (Math.abs(diffX) > 50 && Math.abs(diffX) > Math.abs(diffY)) {
+        diffX > 0 ? goTo(current + 1) : goTo(current - 1);
         startAuto();
       }
     }, { passive: true });
   }
 
-  /* Pause auto when hovering hero */
+  /* Pause on hover (desktop) */
   if (hero) {
     hero.addEventListener('mouseenter', stopAuto);
     hero.addEventListener('mouseleave', startAuto);
   }
 
-  /* Keyboard arrow keys */
+  /* Keyboard arrows (desktop) */
   document.addEventListener('keydown', (e) => {
     if (e.key === 'ArrowLeft')  { goTo(current - 1); startAuto(); }
     if (e.key === 'ArrowRight') { goTo(current + 1); startAuto(); }
   });
 
-  /* Start */
   startAuto();
-
 })();
 
 /* ---------- SCROLL REVEAL ---------- */
@@ -207,8 +202,8 @@ document.querySelectorAll('a[href^="#"]').forEach(link => {
 });
 
 /* ---------- ACTIVE NAV HIGHLIGHT ---------- */
-const sections = document.querySelectorAll('section[id]');
-const navLinks  = document.querySelectorAll('.nav-links a');
+const sections    = document.querySelectorAll('section[id]');
+const navLinks    = document.querySelectorAll('.nav-links a');
 
 const sectionObserver = new IntersectionObserver((entries) => {
   entries.forEach(entry => {
@@ -225,7 +220,7 @@ const sectionObserver = new IntersectionObserver((entries) => {
 
 sections.forEach(s => sectionObserver.observe(s));
 
-/* ---------- PRODUCT CARD TILT ---------- */
+/* ---------- PRODUCT CARD TILT (desktop only) ---------- */
 document.querySelectorAll('.product-card').forEach(card => {
   card.addEventListener('mousemove', (e) => {
     const rect = card.getBoundingClientRect();
@@ -239,41 +234,37 @@ document.querySelectorAll('.product-card').forEach(card => {
 });
 
 /* ---------- LIGHTBOX ---------- */
-(function () {
-  const lightbox      = document.getElementById('lightbox');
-  const lightboxImg   = document.getElementById('lightboxImg');
-  const lightboxClose = document.getElementById('lightboxClose');
+const lightbox      = document.getElementById('lightbox');
+const lightboxImg   = document.getElementById('lightboxImg');
+const lightboxClose = document.getElementById('lightboxClose');
 
-  function openLightbox(src, alt) {
-    lightboxImg.src = src;
-    lightboxImg.alt = alt || '';
-    lightbox.classList.add('open');
-    document.body.style.overflow = 'hidden';
-  }
-
-  function closeLightbox() {
-    lightbox.classList.remove('open');
-    document.body.style.overflow = '';
-  }
-
-  document.querySelectorAll('.product-img-wrap').forEach(wrap => {
-    wrap.addEventListener('click', () => {
-      const img = wrap.querySelector('img');
-      if (img) openLightbox(img.src, img.alt);
-    });
+document.querySelectorAll('.product-img-wrap').forEach(wrap => {
+  wrap.addEventListener('click', () => {
+    const img = wrap.querySelector('img');
+    if (img) {
+      lightboxImg.src = img.src;
+      lightbox.classList.add('open');
+      document.body.style.overflow = 'hidden';
+    }
   });
+});
 
-  lightboxClose.addEventListener('click', closeLightbox);
+function closeLightbox() {
+  lightbox.classList.remove('open');
+  document.body.style.overflow = '';
+  lightboxImg.src = '';
+}
 
+if (lightboxClose) lightboxClose.addEventListener('click', closeLightbox);
+if (lightbox) {
   lightbox.addEventListener('click', (e) => {
     if (e.target === lightbox) closeLightbox();
   });
-
-  document.addEventListener('keydown', (e) => {
-    if (e.key === 'Escape') closeLightbox();
-  });
-})();
+}
+document.addEventListener('keydown', (e) => {
+  if (e.key === 'Escape') closeLightbox();
+});
 
 /* ---------- CONSOLE BRAND ---------- */
-console.log('%cafted.MY', 'font-size:3rem;font-weight:bold;color:#e60000;background:#0d0d0d;padding:1rem 2rem;');
+console.log('%cafted.my', 'font-size:3rem;font-weight:bold;color:#e60000;background:#0d0d0d;padding:1rem 2rem;');
 console.log('%cBorn on the Concrete.', 'font-size:1rem;color:#888;');
