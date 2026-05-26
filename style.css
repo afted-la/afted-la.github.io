@@ -34,7 +34,7 @@ body {
   overflow-x: hidden;
   cursor: none;
 }
-a   { text-decoration: none; color: inherit; }
+a { text-decoration: none; color: inherit; }
 
 /* ==============================
    CUSTOM CURSOR
@@ -240,7 +240,6 @@ a   { text-decoration: none; color: inherit; }
   padding: 0 4rem;
 }
 
-/* ── Dark gradient overlay (always on top of slides) ── */
 .hero-overlay {
   position: absolute;
   inset: 0;
@@ -254,25 +253,17 @@ a   { text-decoration: none; color: inherit; }
   pointer-events: none;
 }
 
-/* ── Slideshow container ── */
 .slideshow {
   position: absolute;
   inset: 0;
   z-index: 1;
 }
 
-/* ── Each slide fills the whole hero ── */
-/*
-   HOW SLIDES WORK:
-   - Every .slide is stacked on top of each other (position absolute)
-   - They all start invisible (opacity: 0)
-   - Only the one with class  .active  is visible (opacity: 1)
-   - JavaScript adds/removes  .active  every 5 seconds
-   - The  transition: opacity 1.2s  makes it fade smoothly
-*/
+/* ── DESKTOP: cover fills the screen ── */
 .slide {
   position: absolute;
   inset: 0;
+  background-color: #000;
   background-size: cover;
   background-position: center center;
   background-repeat: no-repeat;
@@ -280,11 +271,9 @@ a   { text-decoration: none; color: inherit; }
   transition: opacity 1.0s ease-in-out;
   will-change: opacity;
 }
-.slide.active {
-  opacity: 1;
-}
+.slide.active { opacity: 1; }
 
-/* ── Left / Right Arrow Buttons ── */
+/* ── Arrow Buttons ── */
 .slide-arrow {
   position: absolute;
   top: 50%;
@@ -337,19 +326,16 @@ a   { text-decoration: none; color: inherit; }
   transform: scale(1.35);
 }
 
-/* ── Slide progress bar (thin red line at bottom) ── */
 .slide-progress {
   position: absolute;
-  bottom: 0;
-  left: 0;
-  height: 3px;
-  width: 0%;
+  bottom: 0; left: 0;
+  height: 3px; width: 0%;
   background: var(--accent);
   z-index: 10;
   transition: width linear;
 }
 
-/* ── Hero text content (above overlay) ── */
+/* ── Hero text ── */
 .hero-content {
   position: relative;
   z-index: 5;
@@ -383,11 +369,9 @@ a   { text-decoration: none; color: inherit; }
   to   { opacity: 1; transform: translateY(0); }
 }
 
-/* ── Scroll indicator ── */
 .hero-scroll {
   position: absolute;
-  bottom: 2.5rem;
-  right: 4rem;
+  bottom: 2.5rem; right: 4rem;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -402,8 +386,7 @@ a   { text-decoration: none; color: inherit; }
   writing-mode: vertical-rl;
 }
 .hero-scroll-line {
-  width: 1px;
-  height: 55px;
+  width: 1px; height: 55px;
   background: linear-gradient(to bottom, rgba(255,255,255,0.35), transparent);
   animation: scrollPulse 2s ease infinite;
 }
@@ -419,11 +402,8 @@ a   { text-decoration: none; color: inherit; }
   padding: 8rem 4rem;
   background: var(--white);
 }
-.section-header {
-  margin-bottom: 3rem;
-}
+.section-header { margin-bottom: 3rem; }
 
-/* Default grid — 3 columns (for when you have 3+ products) */
 .products-grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
@@ -431,8 +411,6 @@ a   { text-decoration: none; color: inherit; }
   background: var(--grey);
   border: 1.5px solid var(--grey);
 }
-
-/* Single product — centred, max width, clean */
 .products-grid--single {
   display: flex;
   justify-content: center;
@@ -456,12 +434,12 @@ a   { text-decoration: none; color: inherit; }
   box-shadow: 0 20px 60px rgba(0,0,0,0.12);
 }
 
-/* Image area */
 .product-img-wrap {
   position: relative;
   aspect-ratio: 3/4;
   overflow: hidden;
   background: var(--white-2);
+  cursor: pointer;
 }
 .product-img-wrap img {
   width: 100%;
@@ -472,7 +450,6 @@ a   { text-decoration: none; color: inherit; }
 }
 .product-card:hover .product-img-wrap img { transform: scale(1.05); }
 
-/* Badge */
 .product-badge {
   position: absolute;
   top: 1rem; left: 1rem;
@@ -487,7 +464,6 @@ a   { text-decoration: none; color: inherit; }
 }
 .product-badge--red { background: var(--accent); }
 
-/* Hover buy overlay */
 .product-overlay {
   position: absolute;
   inset: 0;
@@ -501,7 +477,6 @@ a   { text-decoration: none; color: inherit; }
 }
 .product-card:hover .product-overlay { opacity: 1; }
 
-/* Product text info */
 .product-info {
   padding: 1.5rem;
   border-top: 1.5px solid var(--grey);
@@ -757,8 +732,7 @@ a   { text-decoration: none; color: inherit; }
 }
 .lightbox-close {
   position: absolute;
-  top: 1.5rem;
-  right: 1.5rem;
+  top: 1.5rem; right: 1.5rem;
   background: none;
   border: none;
   color: #ffffff;
@@ -768,10 +742,9 @@ a   { text-decoration: none; color: inherit; }
   padding: 0.25rem 0.5rem;
   z-index: 9001;
 }
-.product-img-wrap { cursor: pointer; }
 
 /* ==============================
-   RESPONSIVE
+   RESPONSIVE — TABLET
    ============================== */
 @media (max-width: 768px) {
   .nav          { padding: 1.2rem 1.5rem; }
@@ -779,28 +752,54 @@ a   { text-decoration: none; color: inherit; }
   .nav-links    { display: none; }
   .nav-toggle   { display: flex; }
 
+  /* ── HERO MOBILE FIX ──
+     The key fix: on mobile phones, images are portrait.
+     We use background-size: contain so the FULL image
+     is visible (no cropping) with black bars on sides/top.
+     This shows the whole landscape width of the photo.
+  */
   .hero {
     height: 100svh;
     min-height: 100svh;
     padding: 0 1.5rem;
+    align-items: flex-end;
+    padding-bottom: 6rem;
   }
-  .hero-scroll  { display: none; }
+
   .slideshow {
     position: absolute;
     inset: 0;
     width: 100%;
     height: 100%;
   }
+
   .slide {
     position: absolute;
     inset: 0;
     width: 100%;
     height: 100%;
-    background-size: cover;
-    background-position: center top;
+    background-color: #000;
+    background-size: contain;
+    background-position: center center;
     background-repeat: no-repeat;
     background-attachment: scroll;
   }
+
+  /* Make overlay lighter on mobile so image is more visible */
+  .hero-overlay {
+    background: linear-gradient(
+      to bottom,
+      rgba(0,0,0,0.15) 0%,
+      rgba(0,0,0,0.10) 40%,
+      rgba(0,0,0,0.75) 100%
+    );
+  }
+
+  .hero-content {
+    max-width: 100%;
+  }
+
+  .hero-scroll  { display: none; }
 
   .slide-arrow--prev { left: 1rem; }
   .slide-arrow--next { right: 1rem; }
@@ -819,15 +818,26 @@ a   { text-decoration: none; color: inherit; }
   .footer-bottom { padding: 1.2rem 1.5rem; flex-direction: column; gap: 0.5rem; text-align: center; }
 }
 
+/* ==============================
+   RESPONSIVE — SMALL PHONES
+   ============================== */
 @media (max-width: 480px) {
-  .footer-mid    { grid-template-columns: 1fr; }
-  .slide-arrow   { display: none; }
+  .footer-mid  { grid-template-columns: 1fr; }
+  .slide-arrow { display: none; }
 }
 
+/* ==============================
+   RESPONSIVE — PHONE LANDSCAPE
+   When phone is rotated sideways,
+   switch back to cover so it fills wide
+   ============================== */
 @media (max-width: 900px) and (orientation: landscape) {
   .hero {
     height: 100svh;
     min-height: 100svh;
+    align-items: center;
+    padding-bottom: 0;
+    padding: 0 1.5rem;
   }
   .slide {
     background-size: cover;
