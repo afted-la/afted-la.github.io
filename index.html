@@ -37,68 +37,56 @@
   <!-- ===================== HERO ===================== -->
   <!--
   ================================================================
-  HOW TO ADD / CHANGE YOUR 3 SLIDESHOW IMAGES:
+  HOW TO CHANGE SLIDESHOW IMAGES:
 
-  Step 1: Put your 3 images inside the  images/  folder
-          Example names:
-            images/slide1.jpg
-            images/slide2.jpg
-            images/slide3.jpg
+  Each slide has TWO lines you must update together:
+    1.  style="background-image: url('images/1.jpg')"  ← DESKTOP
+    2.  <img class="slide-img" src="images/1.jpg">      ← MOBILE
 
-  Step 2: In the SLIDESHOW section below, find the 3 slide divs.
-          Each one has:  style="background-image: url('images/YOUR-IMAGE.jpg')"
-          Change the filename to match your actual image.
-
-  Step 3: Save index.html and refresh your browser.
-
-  The slideshow will automatically:
-  - Switch to the next image every 5 seconds
-  - Fade smoothly between images
-  - Let visitors click arrows or dots to change slides
-  - Swipe left/right on mobile
+  Always change BOTH to the same filename.
   ================================================================
   -->
   <section class="hero" id="home">
 
-    <!-- Dark overlay so text stays readable -->
     <div class="hero-overlay"></div>
 
-    <!-- ============================================================
-         SLIDESHOW — PUT YOUR 3 IMAGES HERE
-         ============================================================
-         Each <div class="slide"> is ONE image.
-         Change the filename inside url('images/...') to your image.
-
-         YOUR CURRENT IMAGE (hero-bg.jpg.jpeg) is set as SLIDE 1.
-         Replace slide2 and slide3 with your other photos.
-         ============================================================ -->
     <div class="slideshow" id="slideshow">
 
-      <!-- SLIDE 1 — currently your hero-bg.jpg.jpeg photo -->
-      <div class="slide active" style="background-image: url('images/1.jpg');"></div>
+      <!-- SLIDE 1 — change BOTH image references when updating -->
+      <div class="slide active" style="background-image: url('images/1.jpg');">
+        <img class="slide-img" src="images/1.jpg" alt="afted slide 1">
+      </div>
 
-      <!-- SLIDE 2 — replace with your 2nd image -->
-      <div class="slide" style="background-image: url('images/2.jpg');"></div>
+      <!-- SLIDE 2 — change BOTH image references when updating -->
+      <div class="slide" style="background-image: url('images/2.jpg');">
+        <img class="slide-img" src="images/2.jpg" alt="afted slide 2">
+      </div>
 
-      <!-- SLIDE 3 — replace with your 3rd image -->
-      <div class="slide" style="background-image: url('images/3.jpg');"></div>
+      <!-- SLIDE 3 — change BOTH image references when updating -->
+      <div class="slide" style="background-image: url('images/3.jpg');">
+        <img class="slide-img" src="images/3.jpg" alt="afted slide 3">
+      </div>
 
       <!--
-        WANT MORE THAN 3 SLIDES? Copy this line and change the image name:
-        <div class="slide" style="background-image: url('images/slide4.jpg');"></div>
-        Then add one more dot in the slide-dots section below.
+        TO ADD A 4TH SLIDE: copy the block below, change the image name,
+        and add <span class="slide-dot" data-index="3"></span> in the dots section.
+
+        <div class="slide" style="background-image: url('images/4.jpg');">
+          <img class="slide-img" src="images/4.jpg" alt="afted slide 4">
+        </div>
       -->
+
     </div>
+
+    <!-- Arrow buttons -->
+    <button class="slide-arrow slide-arrow--prev" id="slidePrev" aria-label="Previous">&#8592;</button>
+    <button class="slide-arrow slide-arrow--next" id="slideNext" aria-label="Next">&#8594;</button>
 
     <!-- Dot indicators — one dot per slide -->
     <div class="slide-dots" id="slideDots">
       <span class="slide-dot active" data-index="0"></span>
       <span class="slide-dot"        data-index="1"></span>
       <span class="slide-dot"        data-index="2"></span>
-      <!--
-        Added a 4th slide above? Add one more dot:
-        <span class="slide-dot" data-index="3"></span>
-      -->
     </div>
 
     <!-- Hero text content -->
@@ -130,10 +118,6 @@
       <!-- CARD 1 -->
       <div class="product-card">
         <div class="product-img-wrap">
-          <!--
-            YOUR PRODUCT IMAGE IS ALREADY SET BELOW.
-            To change it: replace  images/SHIRT.jpeg  with your new image path.
-          -->
           <img src="images/afted shirt.jpg" alt="afted Shirt">
           <div class="product-overlay"></div>
         </div>
