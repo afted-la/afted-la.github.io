@@ -238,6 +238,42 @@ document.querySelectorAll('.product-card').forEach(card => {
   });
 });
 
+/* ---------- LIGHTBOX ---------- */
+(function () {
+  const lightbox      = document.getElementById('lightbox');
+  const lightboxImg   = document.getElementById('lightboxImg');
+  const lightboxClose = document.getElementById('lightboxClose');
+
+  function openLightbox(src, alt) {
+    lightboxImg.src = src;
+    lightboxImg.alt = alt || '';
+    lightbox.classList.add('open');
+    document.body.style.overflow = 'hidden';
+  }
+
+  function closeLightbox() {
+    lightbox.classList.remove('open');
+    document.body.style.overflow = '';
+  }
+
+  document.querySelectorAll('.product-img-wrap').forEach(wrap => {
+    wrap.addEventListener('click', () => {
+      const img = wrap.querySelector('img');
+      if (img) openLightbox(img.src, img.alt);
+    });
+  });
+
+  lightboxClose.addEventListener('click', closeLightbox);
+
+  lightbox.addEventListener('click', (e) => {
+    if (e.target === lightbox) closeLightbox();
+  });
+
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') closeLightbox();
+  });
+})();
+
 /* ---------- CONSOLE BRAND ---------- */
 console.log('%cafted.MY', 'font-size:3rem;font-weight:bold;color:#e60000;background:#0d0d0d;padding:1rem 2rem;');
 console.log('%cBorn on the Concrete.', 'font-size:1rem;color:#888;');

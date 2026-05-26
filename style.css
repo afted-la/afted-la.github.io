@@ -731,6 +731,46 @@ a   { text-decoration: none; color: inherit; }
 }
 
 /* ==============================
+   LIGHTBOX
+   ============================== */
+.lightbox {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.92);
+  z-index: 9000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s ease;
+}
+.lightbox.open {
+  opacity: 1;
+  pointer-events: all;
+}
+.lightbox-img {
+  max-width: 90vw;
+  max-height: 85vh;
+  object-fit: contain;
+  display: block;
+}
+.lightbox-close {
+  position: absolute;
+  top: 1.5rem;
+  right: 1.5rem;
+  background: none;
+  border: none;
+  color: #ffffff;
+  font-size: 2.5rem;
+  cursor: pointer;
+  line-height: 1;
+  padding: 0.25rem 0.5rem;
+  z-index: 9001;
+}
+.product-img-wrap { cursor: pointer; }
+
+/* ==============================
    RESPONSIVE
    ============================== */
 @media (max-width: 768px) {
@@ -739,8 +779,9 @@ a   { text-decoration: none; color: inherit; }
   .nav-links    { display: none; }
   .nav-toggle   { display: flex; }
 
-  .hero         { padding: 0 1.5rem; }
+  .hero         { padding: 0 1.5rem; min-height: 100svh; background-attachment: scroll; }
   .hero-scroll  { display: none; }
+  .slide        { background-size: cover; background-position: center center; }
 
   .slide-arrow--prev { left: 1rem; }
   .slide-arrow--next { right: 1rem; }
