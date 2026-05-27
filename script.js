@@ -86,7 +86,7 @@ document.querySelectorAll('.mobile-link').forEach(link => {
 
   if (!slides.length) return;
 
-  const SLIDE_DURATION = 5000; // milliseconds between auto-advance
+  const SLIDE_DURATION = 2800; // milliseconds between auto-advance
   let current   = 0;
   let autoTimer = null;
 

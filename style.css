@@ -158,6 +158,9 @@ a { text-decoration: none; color: inherit; }
   color: var(--black);
 }
 .nav-logo {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
   font-family: var(--font-logo);
   font-size: 2rem;
   font-weight: 700;
@@ -166,6 +169,18 @@ a { text-decoration: none; color: inherit; }
   transition: color 0.2s;
 }
 .nav-logo:hover { color: var(--accent); }
+.nav-logo-img {
+  height: 2rem;
+  width: auto;
+  object-fit: contain;
+  display: block;
+  mix-blend-mode: screen;
+  filter: brightness(1.2);
+}
+.nav.scrolled .nav-logo-img {
+  mix-blend-mode: multiply;
+  filter: brightness(0.9);
+}
 .nav-links {
   list-style: none;
   display: flex;
@@ -630,6 +645,7 @@ a { text-decoration: none; color: inherit; }
   .nav.scrolled { padding: 0.8rem 1.5rem; }
   .nav-links    { display: none; }
   .nav-toggle   { display: flex; }
+  .nav-logo-img { height: 1.6rem; }
 
   /* --- Hero wrapper --- */
   .hero {
